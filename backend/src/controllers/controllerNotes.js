@@ -6,7 +6,7 @@ const controller = {
     foldersAPI: (req, res) => {
         db.folders.findAll({
             where: {
-                users_id: req.params.userId
+                users_id: req.session.user.id
             }
         }).then((folders)=>{
             let answer = {
