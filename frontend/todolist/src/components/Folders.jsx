@@ -30,7 +30,7 @@ function Folders(){
         <div className='wrapper'>
             <h1>My folders</h1>
             <ul>
-                {foldersHook.map((e,i)=><li className='folderItem' key={e.id}>{e.name}<button className='item'>open</button><button className='item'>edit</button><button className='item'>delete</button></li>)} 
+                {foldersHook.map((e,i)=><li className='folderItem' key={e.id}>{e.name}<button className='item bn6'>open</button><button className='item bn6'>edit</button><button className='item bn6'>delete</button></li>)} 
             </ul>
 
             <button className='add'>Add folder</button>
