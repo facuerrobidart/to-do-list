@@ -4,16 +4,33 @@ let Op = db.Sequelize.Op;
 
 const controller = {
     foldersAPI: (req, res) => {
-        db.Folder.findAll({
+        db.folders.findAll({
             where: {
                 users_id: req.params.userId
             }
         }).then((folders)=>{
-            res.json(folders);
+            let answer = {
+                folders: folders,
+            }
+            res.json(answer);
         })
     },
     notesInFolderAPI: (req,res) => {
-        res.send("work in progress");
+        let notesFolder = db.folders.findByPk(req.params.folderId);
+        let notes = db.notes.findAll({
+            where:{
+                folders_id: req.params.folderId
+            }
+        });
+
+        Promise.all([notesFolder,notes])
+        .then(([folder,notes])=>{
+            let answer = {
+                folderName: folder.name,
+                notes: notes
+            }
+            res.json(answer);
+        })
     }
 };
 
