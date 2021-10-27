@@ -1,0 +1,16 @@
+{
+  "name": "to-do-list-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Facundo Errobidart",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-router": "0.0.1",
+    "sequelize": "^6.8.0"
+  }
+}
