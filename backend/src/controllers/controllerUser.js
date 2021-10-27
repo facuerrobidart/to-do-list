@@ -11,14 +11,14 @@ const controller = {
             }
         }).then((user)=>{
             let answer=false;
-            if (req.body.password == user.password){
-                req.session.user={};
-                req.session.user.id = user.id;
-                answer=true;
-                console.log(req.session.user.id);
+            if (user!=null){
+                if (req.body.password == user.password){
+                    req.session.user={};
+                    req.session.user.id = user.id;
+                    answer=true;
+                }
             }
-            console.log(answer);
-            res.json(answer);
+            res.send(answer);
         })
         .catch((e)=>{
             console.log(e);

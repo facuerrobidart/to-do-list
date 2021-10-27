@@ -1,9 +1,8 @@
 import React,{useState} from 'react'
-import {Redirect} from 'react-router-dom'
+import {BrowserRouter,Redirect,Route} from 'react-router-dom'
 import './login.css'
-
-
-function Login(){
+import Folders from './Folders'
+function Login(props){
 
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
@@ -16,36 +15,41 @@ function Login(){
             method: 'POST',
             body: JSON.stringify({username: username,password:password}),
             headers: {'Content-Type': 'application/json'},
+            credentials: 'include'
         };
         fetch('http://localhost:3005/users/login', options)
-            .then((response)=>response.json)
+            .then((response)=>response.json())
             .then((data) => {
-                if (data.answer===true){
+                console.log(data);
+                if (data===true){
                     setLogged(true);
                     console.log("logueado");
+                    console.log(logged);
                 }
-                
             })
             .catch(err=>{
                 console.log(err);});
     }
 
-    if (!logged){
+    if (logged===false){
     return(
         <div className="container">
         <div className="wrapper">
-            <form>
+            <form onSubmit={logueo}>
                 <input type="text" onChange={event => setUsername(event.target.value)} name="username" placeholder="login"/>
                 <br></br>
                 <input type="password" onChange={event => setPassword(event.target.value)} name="password" placeholder="password"/>
                 <br></br>
-                <button onClick={logueo} >Log In</button>
+                <button type="submit">Log In</button>
             </form>
         </div>
         </div>
     );
     }else{
-        return <Redirect to='notes/folders'/>
+        return (<BrowserRouter>
+                <Route to="/folders" component={Folders}/>
+                <Redirect to='/folders'/>
+                </BrowserRouter>);
     }
     
 }

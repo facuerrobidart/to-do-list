@@ -14,6 +14,7 @@ const controller = {
             }
             res.json(answer);
         })
+        .catch((e)=>{console.log(e)});
     },
     notesInFolderAPI: (req,res) => {
         let notesFolder = db.folders.findByPk(req.params.folderId);
@@ -29,7 +30,7 @@ const controller = {
                 folderName: folder.name,
                 notes: notes
             }
-            res.json(answer);
+            res.send(answer);
         })
     }
 };
