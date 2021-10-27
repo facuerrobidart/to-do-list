@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react'
-
+import './folders.css'
 function Folders(){
     const [foldersHook,setFolders] = useState([]);
-    const [ready, setReady] = useState(false);
     let fetchFolders = ()=> {
         const options = {
             method: 'GET',
@@ -14,12 +13,6 @@ function Folders(){
             .then((data)=>{
                 console.log(data.folders);
                 setFolders(data.folders);
-                /*while (ready===false){
-                    if(foldersHook.length>0){
-                        setReady(true);
-                    }
-                }
-                console.log(foldersHook);*/
             })
             .catch(e => (console.log(e)));
     };
@@ -33,11 +26,15 @@ function Folders(){
     },[foldersHook]);
 
     return(
-        <div>
+        <div className='container'>
+        <div className='wrapper'>
             <h1>My folders</h1>
             <ul>
-                {foldersHook.map((e,i)=><li key={i}>{e.name}</li>)}
+                {foldersHook.map((e,i)=><li className='folderItem' key={e.id}>{e.name}<button className='item'>open</button><button className='item'>edit</button><button className='item'>delete</button></li>)} 
             </ul>
+
+            <button className='add'>Add folder</button>
+        </div>
         </div>
     );
 }

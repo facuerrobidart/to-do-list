@@ -1,0 +1,33 @@
+.wrapper{
+    text-align: left;
+    width: 100vw;
+    height: fit-content;
+}
+.wrapper h1{
+    text-align: center;
+}
+button.item{
+    float: right;
+    margin-right: 0.5%;
+}
+.folderItem{
+    margin-bottom: 1%;
+    height: 20%;
+    width: 90%;
+}
+
+button.add{
+    display: block;
+    width: 25%;
+    margin:auto;
+}
+
+@media(min-width: 600px){
+    .wrapper{
+        width: 50vw;
+    }
+    .container{
+        display: block;
+        text-align: center;
+    }
+}
