@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        folder_id: {
+        folders_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -24,4 +24,25 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }
+
+    let config = {
+        tableName: "notes",
+        timestamps: false,
+    };
+
+    const Note = sequelize.define(alias,cols,config);
+
+    Note.associate = (models) => {
+        Note.belongsTo(models.folders,{
+            as:"folders",
+            foreignKey: "folders_id"
+        });
+
+        Note.belongsTo(models.users,{
+            as: "users",
+            foreignKey: "users_id"
+        });
+    }
+
+    return Note;
 }
