@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 router.get("/folders",controller.foldersAPI);
 router.get("/folders/:folderId",controller.notesInFolderAPI);
+router.post("/folders/:folderId",bodyParser.json(),controller.createNote);
 router.post("/folders",bodyParser.json(),controller.createFolder);
 
 

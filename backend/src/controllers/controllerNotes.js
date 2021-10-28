@@ -47,7 +47,7 @@ const controller = {
         db.folders.create({
             description: req.body.description,
             users_id: req.session.user.id,
-            folders_id: req.body.folders_id,
+            folders_id: req.params.folderId,
             checked:false
         }).then(()=>{
             let answer = true
