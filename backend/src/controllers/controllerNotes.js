@@ -43,6 +43,17 @@ const controller = {
             res.send(answer);
         });
     },
+    createNote: (req,res)=>{
+        db.folders.create({
+            description: req.body.description,
+            users_id: req.session.user.id,
+            folders_id: req.body.folders_id,
+            checked:false
+        }).then(()=>{
+            let answer = true
+            res.send(answer);
+        });
+    }
 };
 
 module.exports = controller;
