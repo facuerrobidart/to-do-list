@@ -23,6 +23,11 @@ const controller = {
         .catch((e)=>{
             console.log(e);
         });
+    },
+    logout: (req,res)=>{
+        req.session.user = undefined;
+
+        res.send(true);
     }
 }
 
