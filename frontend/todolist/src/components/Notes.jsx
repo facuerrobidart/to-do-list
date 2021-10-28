@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Folders from './Folders'
 import AddNotes from './AddNotes';
+import NotesItem from './NotesItem';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 function Notes(props){
     
@@ -54,11 +55,9 @@ function Notes(props){
                         <h1>Folders={'>'}{folderName}</h1>
                         <ul>
                             {notesHook.map((element,i)=>
-                            <li className='folderItem' key={element.id}>
-                            {element.description}
-                                <button className='item'>edit</button>
-                                <button className='item'>delete</button>
-                            </li>)} 
+                                <li className='folderItem' key={element.id}>
+                                    <NotesItem id={element.id} folderId={props.id} description={element.description} checked={element.checked}></NotesItem>
+                                </li>)} 
                         </ul>
                         <button className='add' onClick={addClick}>Add note</button>
                         <button className='add' onClick={backClick}>Go back</button>
@@ -67,7 +66,7 @@ function Notes(props){
         }else{
             return(
                 <BrowserRouter>
-                    <Route to="/folders/notes/add" render={(props) => <AddNotes {...props} id={folderId} name={folderName}/>}/>
+                    <Route path="/folders/notes/add" render={(props) => <AddNotes {...props} id={folderId} name={folderName}/>}/>
                     <Redirect to='/folders/notes/add'/>
                 </BrowserRouter>
             );

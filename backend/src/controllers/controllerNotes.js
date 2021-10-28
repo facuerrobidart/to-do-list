@@ -41,7 +41,8 @@ const controller = {
         }).then(()=>{
             let answer = true
             res.send(answer);
-        });
+        })
+        .catch(e=>{console.log(e)});
     },
     createNote: (req,res)=>{
         db.notes.create({
@@ -52,7 +53,23 @@ const controller = {
         }).then(()=>{
             let answer = true
             res.send(answer);
-        });
+        })
+        .catch((e)=>{console.log(e)});
+    },
+    changeStatus: (req,res)=>{
+        console.log(req.body);
+        let cambio = req.body.checked; let donde = req.body.id
+        db.notes.update(
+            {
+                checked: cambio
+            },
+            {
+                where: {id: donde}
+            })
+        .then(()=>{
+            res.send(true);
+        })
+        .catch((e)=>{console.log(e)});
     }
 };
 

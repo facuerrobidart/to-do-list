@@ -22,7 +22,6 @@ function AddNotes(props){
         fetch(url, options)
             .then((response)=>response.json())
             .then((data) => {
-                setReturn(data);
                 backClick();
             })
     }
@@ -43,7 +42,7 @@ function AddNotes(props){
     }else{
         return(
             <BrowserRouter>
-                <Route to="/folders/notes" render={(props) => <Notes {...props} id={hookId}/>}/>
+                <Route path="/folders/notes" render={(props) => <Notes {...props} id={hookId}/>}/>
                 <Redirect to='/folders/notes'/>
             </BrowserRouter>
         );

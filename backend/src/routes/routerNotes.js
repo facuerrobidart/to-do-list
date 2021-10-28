@@ -8,6 +8,6 @@ router.get("/folders",controller.foldersAPI);
 router.get("/folders/:folderId",controller.notesInFolderAPI);
 router.post("/folders/:folderId",bodyParser.json(),controller.createNote);
 router.post("/folders",bodyParser.json(),controller.createFolder);
-
+router.put("/folders/status",bodyParser.json(),controller.changeStatus);
 
 module.exports = router;
