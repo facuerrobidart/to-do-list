@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Folders from './Folders'
 import AddNotes from './AddNotes';
 import NotesItem from './NotesItem';
+import './notes.css'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 function Notes(props){
     
@@ -52,16 +53,17 @@ function Notes(props){
     if (backHook===false){
         if (addHook===false){
             return(
-                    <div>
-                        <h1>Folders={'>'}{folderName}</h1>
-                        <ul>
-                            {notesHook.map((element,i)=>
-                                <li className='folderItem' key={element.id}>
+                    <div className='container'>
+                        <div className='wrapper'>
+                            <h1>Folders={'>'}{folderName}</h1>
+                            <ul>
+                                {notesHook.map((element,i)=>
                                     <NotesItem id={element.id} folderId={props.id} description={element.description} checked={element.checked}></NotesItem>
-                                </li>)} 
-                        </ul>
-                        <button className='add' onClick={addClick}>Add note</button>
-                        <button className='add' onClick={backClick}>Go back</button>
+                                )} 
+                            </ul>
+                            <button className='add' onClick={addClick}>Add note</button>
+                            <button className='add' onClick={backClick}>Go back</button>
+                        </div>
                     </div>
             );
         }else{

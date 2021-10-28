@@ -1,0 +1,15 @@
+div.container{
+    display: block;
+    width: 100vw;
+    text-align: center;
+}
+
+div.wrapper{
+    padding: 2%;
+}
+
+
+.btn{
+    float: right;
+    margin-left: 1%;
+}

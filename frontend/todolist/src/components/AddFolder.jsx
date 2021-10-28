@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import { BrowserRouter,Route,Redirect } from 'react-router-dom';
+import './addFolder.css'
 import Folders from './Folders'
+
 
 function AddFolder(){
 
@@ -28,14 +30,16 @@ function AddFolder(){
     }
     if (returnToList===false){
         return(
-            <div>
-                <h1>Add a folder</h1>
-                <form onSubmit={crear}>
-                    <label for="name">Name:</label>
-                    <input type="text" placeholder='put the folder name here' onChange={event => setName(event.target.value)}></input>
-                    <button type="submit"> Add Folder</button>
-                    <button onClick={back}>Go back</button>
-                </form>
+            <div className='container'>
+                <div className="wrapper">
+                    <h1>Add a folder</h1>
+                    <form onSubmit={crear}>
+                        <label htmlFor="name">Name:</label>
+                        <input type="text" placeholder='put the folder name here' onChange={event => setName(event.target.value)}></input>
+                        <button type="submit" className='btn'> Add Folder</button>
+                        <button onClick={back} className='btn'>Go back</button>
+                    </form>
+                </div>
             </div>
         );
     }else{

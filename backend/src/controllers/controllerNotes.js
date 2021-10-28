@@ -57,18 +57,19 @@ const controller = {
         .catch((e)=>{console.log(e)});
     },
     changeStatus: (req,res)=>{
-        let cambio = req.body.checked; let donde = req.body.id
+        console.log(req.body);
         db.notes.update(
             {
-                checked: cambio
+                checked: req.body.checked
             },
             {
-                where: {id: donde}
-            })
+                where: {id:req.body.id}
+            }
+        )
         .then(()=>{
-            res.send(true);
+            res.send("cambiado");
         })
-        .catch((e)=>{console.log(e)});
+        .catch(e=>{console.log(e)});
     },
     deleteNote: (req,res)=>{
         db.notes.destroy({
@@ -76,6 +77,36 @@ const controller = {
         })
         .then(()=>{
             res.send(true);
+        })
+        .catch((e)=>{console.log(e)});
+    },
+    updateNote: (req,res)=>{
+        db.notes.update(
+            {
+                description: req.body.description
+            },
+            {
+                where: {id: req.body.id}
+            }
+        )
+        .then(()=>{
+            res.send(true);
+        })
+        .catch((e)=>{console.log(e)});
+    },
+    deleteFolder: (req,res)=>{
+        db.notes.destroy({where:{folders_id:req.body.id}})
+        .then(()=>{
+            db.folders.destroy(
+                {
+                    where:{id:req.body.id},
+                    cascade: true
+                },
+            )
+            .then(()=>{
+                res.send(true);
+            })
+            .catch((e)=>{console.log(e)});
         })
         .catch((e)=>{console.log(e)});
     }

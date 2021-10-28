@@ -60,6 +60,24 @@ function Folders(){
             .catch(e => (console.log(e)));
     }
 
+    let deleteFolder = (folder_id,event)=>{
+        event.preventDefault();
+        const options = {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: folder_id}),
+            credentials: 'include'
+            };
+        fetch('http://localhost:3005/notes/folders',options)
+            .then((response)=>response.json())
+            .then((data)=>{
+                console.log(data);
+            })
+            .catch(e => (console.log(e)));
+        
+        fetchFolders();
+    }
+
     if (addHook===false){
         if (openHook===false){
             if (logOut===false){
@@ -70,8 +88,7 @@ function Folders(){
                         <ul>
                             {foldersHook.map((element,i)=><li className='folderItem' key={element.id}>{element.name}
                             <button onClick={(e)=> clickOpen(element.id,e)} className='item'>open</button>
-                            <button className='item'>edit</button>
-                            <button className='item'>delete</button></li>)} 
+                            <button onClick={(e)=>deleteFolder(element.id,e)}className='item'>delete</button></li>)} 
                         </ul>
                         <button className='add' onClick={clickAdd}>Add folder</button>
                         <button onClick={exit} className='add'>Log out</button>

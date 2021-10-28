@@ -7,8 +7,10 @@ const bodyParser = require("body-parser");
 router.get("/folders",controller.foldersAPI);
 router.get("/folders/:folderId",controller.notesInFolderAPI);
 router.post("/folders/:folderId",bodyParser.json(),controller.createNote);
-router.post("/folders",bodyParser.json(),controller.createFolder);
 router.put("/folders/status",bodyParser.json(),controller.changeStatus);
+router.put("/folders/:folderId",bodyParser.json(),controller.updateNote);
+router.post("/folders",bodyParser.json(),controller.createFolder);
+router.delete("/folders",bodyParser.json(),controller.deleteFolder);
 router.delete("/folders/:folderId",bodyParser.json(),controller.deleteNote);
 
 module.exports = router;
