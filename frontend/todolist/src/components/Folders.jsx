@@ -69,7 +69,7 @@ function Folders(){
     }else{
         return(
             <BrowserRouter>
-                <Route to="folders/add" component={AddFolder}/>
+                <Route to="/folders/add" component={AddFolder}/>
                 <Redirect to='/folders/add'></Redirect>
             </BrowserRouter>
         )

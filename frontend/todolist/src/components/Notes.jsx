@@ -6,6 +6,7 @@ function Notes(props){
     
     const [notesHook,setNotes] = useState([]);
     const [folderName,setName] = useState('');
+    const [folderId,setId] = useState(props.id);
     const [backHook,setBack] = useState(false);
     const [addHook,setAdd] = useState(false);
     let fetchNotes = ()=> {
@@ -66,10 +67,10 @@ function Notes(props){
         }else{
             return(
                 <BrowserRouter>
-                    <Route to="/folders/notes/add" render={(props) => <AddNotes {...props} id={notesHook[0].folders_id} name={folderName}/>}/>
-                    <Redirect to='folders/notes/add'/>
+                    <Route to="/folders/notes/add" render={(props) => <AddNotes {...props} id={folderId} name={folderName}/>}/>
+                    <Redirect to='/folders/notes/add'/>
                 </BrowserRouter>
-                );
+            );
         }
     }else{
         return(

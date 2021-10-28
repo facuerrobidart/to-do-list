@@ -44,7 +44,7 @@ const controller = {
         });
     },
     createNote: (req,res)=>{
-        db.folders.create({
+        db.notes.create({
             description: req.body.description,
             users_id: req.session.user.id,
             folders_id: req.params.folderId,
