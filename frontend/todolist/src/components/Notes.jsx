@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from 'react'
 import Folders from './Folders'
+import AddNotes from './AddNotes';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 function Notes(props){
     
     const [notesHook,setNotes] = useState([]);
     const [folderName,setName] = useState('');
     const [backHook,setBack] = useState(false);
-
+    const [addHook,setAdd] = useState(false);
     let fetchNotes = ()=> {
         const options = {
             method: 'GET',
@@ -39,23 +40,37 @@ function Notes(props){
         setBack(true);
         console.log(backHook);
     }
+
+    let addClick = (event)=>{
+        event.preventDefault();
+        setAdd(true);
+    }
     
     if (backHook===false){
-        return(
-                <div>
-                    <h1>Folders={'>'}{folderName}</h1>
-                    <ul>
-                        {notesHook.map((element,i)=>
-                        <li className='folderItem' key={element.id}>
-                        {element.description}
-                            <button className='item'>edit</button>
-                            <button className='item'>delete</button>
-                        </li>)} 
-                    </ul>
-                    <button className='add'>Add note</button>
-                    <button className='add' onClick={backClick}>Go back</button>
-                </div>
-        );
+        if (addHook===false){
+            return(
+                    <div>
+                        <h1>Folders={'>'}{folderName}</h1>
+                        <ul>
+                            {notesHook.map((element,i)=>
+                            <li className='folderItem' key={element.id}>
+                            {element.description}
+                                <button className='item'>edit</button>
+                                <button className='item'>delete</button>
+                            </li>)} 
+                        </ul>
+                        <button className='add' onClick={addClick}>Add note</button>
+                        <button className='add' onClick={backClick}>Go back</button>
+                    </div>
+            );
+        }else{
+            return(
+                <BrowserRouter>
+                    <Route to="/folders/notes/add" render={(props) => <AddNotes {...props} id={notesHook[0].folders_id} name={folderName}/>}/>
+                    <Redirect to='folders/notes/add'/>
+                </BrowserRouter>
+                );
+        }
     }else{
         return(
             <BrowserRouter>
