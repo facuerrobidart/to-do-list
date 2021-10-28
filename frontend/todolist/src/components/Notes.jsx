@@ -10,6 +10,7 @@ function Notes(props){
     const [folderId,setId] = useState(props.id);
     const [backHook,setBack] = useState(false);
     const [addHook,setAdd] = useState(false);
+
     let fetchNotes = ()=> {
         const options = {
             method: 'GET',
@@ -32,7 +33,6 @@ function Notes(props){
         fetchNotes();
     },[]);
 
-    
     useEffect(()=>{
         console.log(notesHook);
     },[notesHook]);
@@ -42,6 +42,7 @@ function Notes(props){
         setBack(true);
         console.log(backHook);
     }
+
 
     let addClick = (event)=>{
         event.preventDefault();

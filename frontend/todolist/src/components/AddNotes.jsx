@@ -11,7 +11,8 @@ function AddNotes(props){
     let backClick=()=>{
         setReturn(true);
     }
-    let postNote = ()=>{
+    let postNote = (event)=>{
+        event.preventDefault();
         const options = {
             method: 'POST',
             body: JSON.stringify({description: note, folders_id: props.id}),

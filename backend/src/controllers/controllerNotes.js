@@ -57,7 +57,6 @@ const controller = {
         .catch((e)=>{console.log(e)});
     },
     changeStatus: (req,res)=>{
-        console.log(req.body);
         let cambio = req.body.checked; let donde = req.body.id
         db.notes.update(
             {
@@ -66,6 +65,15 @@ const controller = {
             {
                 where: {id: donde}
             })
+        .then(()=>{
+            res.send(true);
+        })
+        .catch((e)=>{console.log(e)});
+    },
+    deleteNote: (req,res)=>{
+        db.notes.destroy({
+            where: {id: req.body.id}
+        })
         .then(()=>{
             res.send(true);
         })
