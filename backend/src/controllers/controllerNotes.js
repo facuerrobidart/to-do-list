@@ -32,7 +32,16 @@ const controller = {
             }
             res.send(answer);
         })
-    }
+    },
+    createFolder: (req,res)=>{
+        db.folders.create({
+            name: req.body.name,
+            users_id: req.session.user.id
+        }).then(()=>{
+            let answer = true
+            res.send(answer);
+        });
+    },
 };
 
 module.exports = controller;

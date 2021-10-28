@@ -1,7 +1,10 @@
 import React,{useState,useEffect} from 'react'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import AddFolder from './AddFolder';
 import './folders.css'
 function Folders(){
     const [foldersHook,setFolders] = useState([]);
+    const [addHook,setAdd] = useState(false);
     let fetchFolders = ()=> {
         const options = {
             method: 'GET',
@@ -25,18 +28,32 @@ function Folders(){
         //console.log(foldersHook);
     },[foldersHook]);
 
-    return(
-        <div className='container'>
-        <div className='wrapper'>
-            <h1>My folders</h1>
-            <ul>
-                {foldersHook.map((e,i)=><li className='folderItem' key={e.id}>{e.name}<button className='item bn6'>open</button><button className='item bn6'>edit</button><button className='item bn6'>delete</button></li>)} 
-            </ul>
+    let clickAdd = (event)=>{
+        event.preventDefault();
+        setAdd(true)
+    }
 
-            <button className='add'>Add folder</button>
-        </div>
-        </div>
-    );
+    if (addHook===false){
+        return(
+            <div className='container'>
+            <div className='wrapper'>
+                <h1>My folders</h1>
+                <ul>
+                    {foldersHook.map((e,i)=><li className='folderItem' key={e.id}>{e.name}<button className='item bn6'>open</button><button className='item bn6'>edit</button><button className='item bn6'>delete</button></li>)} 
+                </ul>
+
+                <button className='add' onClick={clickAdd}>Add folder</button>
+            </div>
+            </div>
+        );
+    }else{
+        return(
+            <BrowserRouter>
+                <Route to="/foldersAdd" component={AddFolder}></Route>
+                <Redirect to='/folders/add'/>
+            </BrowserRouter>
+        )
+    }
 }
 
 export default Folders;
