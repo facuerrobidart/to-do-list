@@ -32,6 +32,7 @@ const controller = {
             }
             res.send(answer);
         })
+        .catch(e=>{console.log(e)});
     },
     createFolder: (req,res)=>{
         db.folders.create({

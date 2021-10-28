@@ -1,10 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import AddFolder from './AddFolder';
+import Notes from './Notes';
 import './folders.css'
 function Folders(){
     const [foldersHook,setFolders] = useState([]);
     const [addHook,setAdd] = useState(false);
+    const [openHook,setOpen] = useState(false);
+    const [targetFolder,setTarget] = useState(0);
+
     let fetchFolders = ()=> {
         const options = {
             method: 'GET',
@@ -33,24 +37,40 @@ function Folders(){
         setAdd(true)
     }
 
-    if (addHook===false){
-        return(
-            <div className='container'>
-            <div className='wrapper'>
-                <h1>My folders</h1>
-                <ul>
-                    {foldersHook.map((e,i)=><li className='folderItem' key={e.id}>{e.name}<button className='item bn6'>open</button><button className='item bn6'>edit</button><button className='item bn6'>delete</button></li>)} 
-                </ul>
+    let clickOpen = (folder_id,event)=>{
+        event.preventDefault();
+        setOpen(true); setTarget(folder_id);
+    }
 
-                <button className='add' onClick={clickAdd}>Add folder</button>
-            </div>
-            </div>
-        );
+    if (addHook===false){
+        if (openHook===false){
+            return(
+                <div className='container'>
+                <div className='wrapper'>
+                    <h1>My folders</h1>
+                    <ul>
+                        {foldersHook.map((element,i)=><li className='folderItem' key={element.id}>{element.name}
+                        <button onClick={(e)=> clickOpen(element.id,e)} className='item'>open</button>
+                        <button className='item'>edit</button>
+                        <button className='item'>delete</button></li>)} 
+                    </ul>
+                    <button className='add' onClick={clickAdd}>Add folder</button>
+                </div>
+                </div>
+            );
+        }else{
+            return(
+                <BrowserRouter>
+                    <Route to="/folders/notes" render={(props) => <Notes {...props} id={targetFolder}/>}/>
+                    <Redirect to='folders/notes'/>
+                </BrowserRouter>
+            )
+        }
     }else{
         return(
             <BrowserRouter>
-                <Route to="/foldersAdd" component={AddFolder}></Route>
-                <Redirect to='/folders/add'/>
+                <Route to="folders/add" component={AddFolder}/>
+                <Redirect to='/folders/add'></Redirect>
             </BrowserRouter>
         )
     }
